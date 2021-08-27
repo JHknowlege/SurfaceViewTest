@@ -55,6 +55,10 @@ public class PlayerSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
     public void play(String assetsPath) throws IOException {
         Log.d(TAG,"play = >"+assetsPath);
+        if (mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+        }
         AssetFileDescriptor descriptor = getContext().getAssets().openFd(assetsPath);
         mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
         descriptor.close();

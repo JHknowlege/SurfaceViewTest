@@ -10,7 +10,7 @@ import java.nio.FloatBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class GLSurfaceViewTest : GLSurfaceView, SurfaceHolder.Callback{
+class TestGLSurfaceView : GLSurfaceView, SurfaceHolder.Callback{
     constructor(context: Context?) : super(context){
         _init()
     }

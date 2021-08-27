@@ -4,39 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".player.PlayerActivity">
+    tools:context=".textureview.TextureViewActivity">
 
-    <com.jhzl.surfaceviewtest.player.PlayerSurfaceView
-        android:id="@+id/playerSurfaceView"
+    <com.jhzl.surfaceviewtest.textureview.TestTextureView
+        android:id="@+id/texture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp" />
 
     <LinearLayout
-        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/play_btn"
+            android:id="@+id/player_mp4_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:text="播放" />
 
         <Button
             android:id="@+id/pause_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:text="暂停" />
 
         <Button
-            android:id="@+id/resume_btn"
+            android:id="@+id/restart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:text="重新播放" />
-
 
 
         <Button
@@ -55,4 +56,5 @@
             android:text="放大" />
 
     </LinearLayout>
+
 </FrameLayout>

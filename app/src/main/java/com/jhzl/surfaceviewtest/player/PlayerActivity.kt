@@ -1,54 +1,44 @@
-package com.jhzl.surfaceviewtest.player;
+package com.jhzl.surfaceviewtest.player
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import com.jhzl.surfaceviewtest.R
+import java.io.IOException
 
-import android.os.Bundle;
-import android.view.View;
-
-import com.jhzl.surfaceviewtest.R;
-
-import java.io.IOException;
-
-public class PlayerActivity extends AppCompatActivity {
-
-    private PlayerSurfaceView mPlayerSurfaceView;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player);
-        mPlayerSurfaceView = findViewById(R.id.playerSurfaceView);
-        View playBtn = findViewById(R.id.play_btn);
-        playBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    mPlayerSurfaceView.play("your_name.mp4");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+class PlayerActivity : AppCompatActivity() {
+    private var mPlayerSurfaceView: PlayerSurfaceView? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_player)
+        mPlayerSurfaceView = findViewById(R.id.playerSurfaceView)
+        val playBtn = findViewById<View>(R.id.play_btn)
+        playBtn.setOnClickListener {
+            try {
+                mPlayerSurfaceView?.play("your_name.mp4")
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-        });
-        View pauseBtn = findViewById(R.id.pause_btn);
-        pauseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPlayerSurfaceView.pause();
+        }
+        val pauseBtn = findViewById<View>(R.id.pause_btn)
+        pauseBtn.setOnClickListener { mPlayerSurfaceView?.pause() }
+        findViewById<View>(R.id.resume_btn).setOnClickListener(View.OnClickListener {
+            if (mPlayerSurfaceView?.isPlaying == true) {
+                return@OnClickListener
             }
-        });
-
-        findViewById(R.id.resume_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mPlayerSurfaceView.isPlaying()){
-                    return;
-                }
-                mPlayerSurfaceView.resume();;
-            }
-        });
+            mPlayerSurfaceView?.resume()
+        })
 
 
+        findViewById<Button>(R.id.scale_in_btn).setOnClickListener {
+            mPlayerSurfaceView?.scaleX = 0.5f
+            mPlayerSurfaceView?.scaleY = 0.5f
+        }
 
-
+        findViewById<Button>(R.id.scale_out_btn).setOnClickListener {
+            mPlayerSurfaceView?.scaleX = 1f
+            mPlayerSurfaceView?.scaleY = 1f
+        }
     }
 }

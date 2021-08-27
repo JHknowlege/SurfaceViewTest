@@ -1,94 +1,71 @@
-package com.jhzl.surfaceviewtest.player;
+package com.jhzl.surfaceviewtest.player
 
-import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.content.Context
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.util.AttributeSet
+import android.util.Log
+import android.view.SurfaceHolder
+import android.view.SurfaceView
+import com.jhzl.surfaceviewtest.player.PlayerSurfaceView
+import java.io.IOException
 
-import androidx.annotation.NonNull;
+class PlayerSurfaceView : SurfaceView, SurfaceHolder.Callback {
+    var mediaPlayer = MediaPlayer()
 
-import java.io.IOException;
-import java.io.InputStream;
-
-public class PlayerSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
-    public static final String TAG = PlayerSurfaceView.class.getSimpleName();
-    MediaPlayer mediaPlayer = new MediaPlayer();
-
-    public PlayerSurfaceView(Context context) {
-        super(context);
-        init();
+    constructor(context: Context?) : super(context) {
+        init()
     }
 
-    public PlayerSurfaceView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+        init()
     }
 
-    public PlayerSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        init()
     }
 
-    public void init() {
-        getHolder().addCallback(this);
+    fun init() {
+        holder.addCallback(this)
     }
 
-    @Override
-    public void surfaceCreated(@NonNull SurfaceHolder holder) {
-
+    override fun surfaceCreated(holder: SurfaceHolder) {}
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
+        mediaPlayer.stop()
+        mediaPlayer.release()
     }
 
-    @Override
-    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-
-    }
-
-    @Override
-    public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-        mediaPlayer.stop();
-        mediaPlayer.release();
-    }
-
-    public void play(String assetsPath) throws IOException {
-        Log.d(TAG,"play = >"+assetsPath);
-        if (mediaPlayer.isPlaying()){
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-        }
-        AssetFileDescriptor descriptor = getContext().getAssets().openFd(assetsPath);
-        mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
-        descriptor.close();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+    @Throws(IOException::class)
+    fun play(assetsPath: String) {
+        Log.d(TAG, "play = >$assetsPath")
+        mediaPlayer.reset()
+        val descriptor = context.assets.openFd(assetsPath)
+        mediaPlayer.setDataSource(descriptor.fileDescriptor, descriptor.startOffset, descriptor.length)
+        descriptor.close()
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
         //设置holder关联
-        mediaPlayer.setDisplay(getHolder());
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.start();
-            }
-        });
-        mediaPlayer.prepare();
+        mediaPlayer.setDisplay(holder)
+        mediaPlayer.setOnPreparedListener { mp -> mp.start() }
+        mediaPlayer.prepare()
     }
 
-    public void stop() {
-        mediaPlayer.stop();
+    fun stop() {
+        mediaPlayer.stop()
     }
 
-    public void pause() {
-        mediaPlayer.pause();
+    fun pause() {
+        mediaPlayer.pause()
     }
 
-    public void resume() {
-        mediaPlayer.start();
+    fun resume() {
+        mediaPlayer.start()
     }
 
-    public boolean isPlaying(){
-        return mediaPlayer.isPlaying();
+    val isPlaying: Boolean
+        get() = mediaPlayer.isPlaying
+
+    companion object {
+        val TAG = PlayerSurfaceView::class.java.simpleName
     }
 }
-
-

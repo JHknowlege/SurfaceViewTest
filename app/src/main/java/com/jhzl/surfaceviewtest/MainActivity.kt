@@ -1,35 +1,28 @@
-package com.jhzl.surfaceviewtest;
+package com.jhzl.surfaceviewtest
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.jhzl.surfaceviewtest.glsurfaceview.GLSurfaceViewActivity
+import com.jhzl.surfaceviewtest.player.PlayerActivity
+import com.jhzl.surfaceviewtest.simple.SimpleSurfaceViewActivity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
-import com.jhzl.surfaceviewtest.player.PlayerActivity;
-import com.jhzl.surfaceviewtest.simple.SimpleSurfaceViewActivity;
-
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-       findViewById(R.id.simple_life_cycle_btn).setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(MainActivity.this, SimpleSurfaceViewActivity.class);
-               startActivity(intent);
-           }
-       });
-
-       findViewById(R.id.player_mp4_btn).setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
-               startActivity(intent);
-           }
-       });
-
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        findViewById<View>(R.id.simple_life_cycle_btn).setOnClickListener {
+            val intent = Intent(this@MainActivity, SimpleSurfaceViewActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<View>(R.id.player_mp4_btn).setOnClickListener {
+            val intent = Intent(this@MainActivity, PlayerActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<View>(R.id.gl_surfaceview_btn).setOnClickListener{
+            val intent = Intent(this@MainActivity,GLSurfaceViewActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

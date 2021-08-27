@@ -6,16 +6,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <Button
-        android:text="测试Surface生命周期"
-        android:id="@+id/simple_life_cycle_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <Button
-        android:text="测试Surface视频播放"
+        android:id="@+id/simple_life_cycle_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试Surface生命周期" />
+
+    <Button
         android:id="@+id/player_mp4_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="测试Surface视频播放" />
+
+
+    <Button
+        android:id="@+id/gl_surfaceview_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试GLSurface" />
 
 </LinearLayout>

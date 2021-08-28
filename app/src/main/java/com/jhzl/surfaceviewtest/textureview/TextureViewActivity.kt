@@ -31,5 +31,9 @@ class TextureViewActivity : AppCompatActivity() {
             testTextureView.scaleX = 1f
             testTextureView.scaleY = 1f
         }
+
+        findViewById<Button>(R.id.rotate_btn).setOnClickListener {
+            testTextureView.rotation = testTextureView.rotation+90f
+        }
     }
 }

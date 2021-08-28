@@ -40,5 +40,9 @@ class PlayerActivity : AppCompatActivity() {
             mPlayerSurfaceView?.scaleX = 1f
             mPlayerSurfaceView?.scaleY = 1f
         }
+
+        findViewById<Button>(R.id.rotate_btn).setOnClickListener {
+            mPlayerSurfaceView?.rotation = mPlayerSurfaceView?.rotation!! +90
+        }
     }
 }

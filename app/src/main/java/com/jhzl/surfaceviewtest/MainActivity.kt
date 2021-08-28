@@ -9,6 +9,7 @@ import com.jhzl.surfaceviewtest.glsurfaceview.GLSurfaceViewActivity
 import com.jhzl.surfaceviewtest.player.PlayerActivity
 import com.jhzl.surfaceviewtest.simple.SimpleSurfaceViewActivity
 import com.jhzl.surfaceviewtest.textureview.TextureViewActivity
+import com.jhzl.surfaceviewtest.window.TestWindow
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +23,18 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
             startActivity(intent)
         }
-        findViewById<View>(R.id.gl_surfaceview_btn).setOnClickListener{
-            val intent = Intent(this@MainActivity,GLSurfaceViewActivity::class.java)
+        findViewById<View>(R.id.gl_surfaceview_btn).setOnClickListener {
+            val intent = Intent(this@MainActivity, GLSurfaceViewActivity::class.java)
             startActivity(intent)
         }
-        findViewById<Button>(R.id.texture_btn).setOnClickListener{
-            val intent = Intent(this@MainActivity,TextureViewActivity::class.java)
+        findViewById<Button>(R.id.texture_btn).setOnClickListener {
+            val intent = Intent(this@MainActivity, TextureViewActivity::class.java)
             startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.window_surface_btn).setOnClickListener {
+            val testWindow = TestWindow()
+            testWindow.show(this@MainActivity)
         }
 
     }
